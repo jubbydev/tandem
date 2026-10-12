@@ -11,7 +11,7 @@ export type BriefComment = Readonly<{
   author: string;
   at: string;
 }>;
-export type BriefLine = Readonly<{
+type BriefLine = Readonly<{
   id: string;
   number: number;
   section: string;

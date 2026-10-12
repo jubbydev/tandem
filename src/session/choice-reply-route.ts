@@ -18,7 +18,7 @@ import {
 
 /** Bumped whenever the questions below change shape or meaning. */
 export const CHOICE_REPLY_ROUTE_QUESTION_VERSION = "choice-reply-route/1";
-export const CHOICE_REPLY_ROUTE_CONFIDENCE_THRESHOLD = 0.8;
+const CHOICE_REPLY_ROUTE_CONFIDENCE_THRESHOLD = 0.8;
 /** Longer messages carry instructions or questions the coordinator should read. */
 export const MAX_CHOICE_REPLY_CHARS = 160;
 const MAX_OPEN_CHOICES = 24;

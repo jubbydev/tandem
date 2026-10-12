@@ -4,7 +4,7 @@ import { taskSessionDirectory } from "../runtime/persistence.ts";
 import { isTerminalTask } from "./records.ts";
 
 /** How long a finished task keeps its worker conversation. Its timeline and reports are kept. */
-export const TRANSCRIPT_RETENTION_DAYS = 30;
+const TRANSCRIPT_RETENTION_DAYS = 30;
 
 const RETENTION_MS = TRANSCRIPT_RETENTION_DAYS * 24 * 60 * 60 * 1000;
 

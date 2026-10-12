@@ -12,7 +12,7 @@ import {
 import type { RequestBriefContent } from "../contracts.ts";
 
 /** What the reader approves from, by the heading the brief shows it under. */
-export type BriefTopSections = Readonly<Record<string, string>>;
+type BriefTopSections = Readonly<Record<string, string>>;
 
 /** One line per section that may not read plainly; empty when none were found. */
 export type BriefLanguageChecker = (content: RequestBriefContent) => Promise<readonly string[]>;
@@ -45,7 +45,7 @@ const EXACT_TELLS: readonly (readonly [RegExp, string])[] = [
 ];
 
 /** The top of the brief as the reader sees it; a brief saved before the summary has less. */
-export function briefTopSections(content: RequestBriefContent): BriefTopSections {
+function briefTopSections(content: RequestBriefContent): BriefTopSections {
   const sections: Record<string, string> = { "TL;DR": content.goal };
   const summary = content.summary;
   if (summary !== undefined) {
@@ -66,7 +66,7 @@ export function briefTopSections(content: RequestBriefContent): BriefTopSections
 }
 
 /** The exact tells in each section, named with the text that tripped them. */
-export function exactLanguageFindings(sections: BriefTopSections): readonly string[] {
+function exactLanguageFindings(sections: BriefTopSections): readonly string[] {
   return Object.entries(sections).flatMap(([section, text]) =>
     EXACT_TELLS.flatMap(([pattern, tell]) => {
       const match = pattern.exec(text);

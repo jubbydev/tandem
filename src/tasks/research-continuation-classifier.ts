@@ -19,15 +19,15 @@ import {
 } from "../contracts.ts";
 
 /** Pinned closed-set question and answer schema; bump whenever the options or wording change. */
-export const RESEARCH_CONTINUATION_QUESTION_VERSION = "research-continuation/1";
+const RESEARCH_CONTINUATION_QUESTION_VERSION = "research-continuation/1";
 /** Recorded as `classifierVersion` for a Jev-selected disposition; pins question and model. */
 export const RESEARCH_CONTINUATION_CLASSIFIER_VERSION =
   `${RESEARCH_CONTINUATION_QUESTION_VERSION}@${JEV_MODEL}` as const;
 /** A Jev choice below this confidence is discarded for the `implementation-interview` fallback. */
 export const RESEARCH_CONTINUATION_CONFIDENCE_THRESHOLD = 0.8;
 export const DEFAULT_RESEARCH_CONTINUATION_TIMEOUT_MS = 1_500;
-export const MIN_RESEARCH_CONTINUATION_TIMEOUT_MS = 100;
-export const MAX_RESEARCH_CONTINUATION_TIMEOUT_MS = 10_000;
+const MIN_RESEARCH_CONTINUATION_TIMEOUT_MS = 100;
+const MAX_RESEARCH_CONTINUATION_TIMEOUT_MS = 10_000;
 /** Upper bound on the sanitized objective sent to Jev; nothing else leaves the process. */
 export const MAX_CLASSIFIED_OBJECTIVE_CHARS = 2_000;
 

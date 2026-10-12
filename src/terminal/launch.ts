@@ -16,7 +16,7 @@ import { defaultRunInteractive } from "./cli-process.ts";
 import type { TerminalEnvironment } from "./environment.ts";
 import { streamIsTTY } from "./process.ts";
 
-export function launchProcessEnvironment(source: TandemEnvironmentSource): TandemEnvironmentSource {
+function launchProcessEnvironment(source: TandemEnvironmentSource): TandemEnvironmentSource {
   const sanitized: Record<string, string | undefined> = { ...source };
   delete sanitized.TANDEM_SOURCE_REPO;
   delete sanitized.TANDEM_PARENT_WORKSPACE;

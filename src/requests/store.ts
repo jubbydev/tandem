@@ -16,12 +16,12 @@ import {
 } from "./brief.ts";
 import { parseRequestBriefRecord } from "./store-codec.ts";
 
-export type CreateRequestBriefInput = Readonly<{
+type CreateRequestBriefInput = Readonly<{
   readonly repoPath: string;
   readonly content: RequestBriefContent;
 }>;
 
-export type RequestBriefTransform = (
+type RequestBriefTransform = (
   record: RequestBriefRecord,
 ) => RequestBriefRecord | PromiseLike<RequestBriefRecord>;
 

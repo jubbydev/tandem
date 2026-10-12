@@ -27,8 +27,8 @@ import {
 import { routeChoiceReply, routeInvestigate, routePrReview, routePullUp } from "./prompt-routes.ts";
 import { mentionsPullUp } from "./pull-up-route.ts";
 
-export const DEFAULT_PROMPT_ROUTING_TIMEOUT_MS = 1_500;
-export const PROMPT_ROUTING_CONFIDENCE_THRESHOLD = 0.8;
+const DEFAULT_PROMPT_ROUTING_TIMEOUT_MS = 1_500;
+const PROMPT_ROUTING_CONFIDENCE_THRESHOLD = 0.8;
 const MAX_ROUTABLE_PROMPT_CHARS = 16_000;
 const TASK_ID_PATTERN =
   /\b(?:task-[A-Za-z0-9][A-Za-z0-9._-]{0,127}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b/giu;

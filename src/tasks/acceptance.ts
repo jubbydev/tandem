@@ -104,7 +104,7 @@ export function policyIdentity(policy: ResolvedPolicy): string {
 }
 
 /** Pins a contract to the delivered code, generation, and policy. */
-export function contractIdentity(task: TaskRecord, head: string): ContractIdentity {
+function contractIdentity(task: TaskRecord, head: string): ContractIdentity {
   return {
     head: readHead(head),
     generation: task.generation,

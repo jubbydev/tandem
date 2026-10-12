@@ -19,7 +19,7 @@ export type AccountLimit = Readonly<{
   fetchedAt: IsoTimestamp;
 }>;
 export type LimitMeter = AccountLimit & Readonly<{ resetInMs: number | "unavailable" }>;
-export type UsageTotals = Readonly<{
+type UsageTotals = Readonly<{
   costMicros: number;
   unpricedSamples: number;
   agentMs: number;

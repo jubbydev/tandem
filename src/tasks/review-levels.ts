@@ -1,7 +1,7 @@
 import type { ReviewLevelRecord, TaskRecord } from "../contracts.ts";
 
 /** The most a change may touch and still be reviewed light. */
-export const LIGHT_REVIEW_LIMITS = {
+const LIGHT_REVIEW_LIMITS = {
   maxChangedFiles: 5,
   maxChangedLines: 200,
 } as const;

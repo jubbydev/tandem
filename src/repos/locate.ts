@@ -205,7 +205,7 @@ async function describeCheckout(path: string, run: CommandRunner): Promise<Named
  * Clones a repository the user has no checkout of. A blobless clone keeps full history, which a
  * merge base needs, while downloading file contents only on demand.
  */
-export async function cloneRepo(run: CommandRunner, repo: string, home: string): Promise<string> {
+async function cloneRepo(run: CommandRunner, repo: string, home: string): Promise<string> {
   const destination = join(home, "clones", ...repoName(repo).split("/"));
   await mkdir(dirname(destination), { recursive: true });
   await runChecked(

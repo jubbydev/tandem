@@ -8,7 +8,7 @@ import {
 
 /** Bumped whenever the questions below change shape or meaning. */
 export const PULL_UP_ROUTE_QUESTION_VERSION = "pull-up-route/1";
-export const PULL_UP_ROUTE_CONFIDENCE_THRESHOLD = 0.8;
+const PULL_UP_ROUTE_CONFIDENCE_THRESHOLD = 0.8;
 export const MAX_PULL_UP_CANDIDATES = 15;
 const MAX_LABEL_CHARS = 200;
 
