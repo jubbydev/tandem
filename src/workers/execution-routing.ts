@@ -45,10 +45,7 @@ import { formatDecisionQuestion, taskName } from "../tasks/question.ts";
 import type { WorkerRole } from "./jobs.ts";
 
 /** Why no catalogue evidence is on hand. None of these ever reads as "nothing is included". */
-type ModelCatalogueUnavailableReason =
-  | "not-consulted"
-  | "catalogue-unreadable"
-  | "catalogue-empty";
+type ModelCatalogueUnavailableReason = "not-consulted" | "catalogue-unreadable" | "catalogue-empty";
 
 /**
  * The OMP catalogue and the explicitly enabled providers as one boundary observed them. A snapshot
