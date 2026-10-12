@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, setDefaultTimeout, test } from "bun:test";
 import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -9,6 +9,9 @@ import {
   observeWorktreeContainment,
   recheckSuperseded,
 } from "../../src/service/superseded.ts";
+
+// Each test runs real git (clone, push, worktree); under a full parallel run that can pass 5s.
+setDefaultTimeout(20_000);
 
 const pr = (overrides: Partial<PullRequestMetadata>): PullRequestMetadata => ({
   repository: "owner/repo",

@@ -1,4 +1,4 @@
-import { afterEach, expect, test } from "bun:test";
+import { afterEach, expect, setDefaultTimeout, test } from "bun:test";
 import { mkdir, mkdtemp, readFile, realpath, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -13,6 +13,9 @@ import {
   removeReviewWorktree,
 } from "../../src/pr-review/worktree.ts";
 import { fakeGh, ok, prView } from "./fake-gh.ts";
+
+// Each test runs real git (clone, push, worktree); under a full parallel run that can pass 5s.
+setDefaultTimeout(20_000);
 
 const folders: string[] = [];
 afterEach(async () => {
