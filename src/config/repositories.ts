@@ -9,6 +9,7 @@ import type {
   SetupCommand,
   ValidationCommand,
 } from "../contracts.ts";
+import { ensurePrivateDirectoryTree } from "../coordinator/lock.ts";
 import { writeTextAtomically } from "../runtime/persistence.ts";
 import { type ModelSettings, readModelSettingsAt } from "./models.ts";
 import { copyPolicy, parsePolicy, parsePolicyOverride } from "./policy.ts";
@@ -24,7 +25,6 @@ import {
   assertPhysicalRepositoryReference,
   configuredHome,
   ensureCentralDirectory,
-  ensurePrivateDirectoryTree,
   inspectPolicyPath,
   isAlreadyExistsError,
   isContainedPath,

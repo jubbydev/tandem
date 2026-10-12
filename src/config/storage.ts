@@ -139,40 +139,6 @@ export async function inspectPolicyPath(
   return { exists: false };
 }
 
-export async function ensurePrivateDirectoryTree(directory: string, field: string): Promise<void> {
-  const missing: string[] = [];
-  let current = directory;
-  while (true) {
-    try {
-      const details = await lstat(current);
-      if (details.isSymbolicLink() || !details.isDirectory()) {
-        throw new Error(`${field} must be a private directory`);
-      }
-      break;
-    } catch (error) {
-      if (!isNotFoundError(error)) throw error;
-      const parent = path.dirname(current);
-      if (parent === current) throw error;
-      missing.unshift(path.basename(current));
-      current = parent;
-    }
-  }
-
-  for (const component of missing) {
-    const next = path.join(current, component);
-    try {
-      await mkdir(next, { mode: 0o700 });
-    } catch (error) {
-      if (!isAlreadyExistsError(error)) throw error;
-    }
-    const details = await lstat(next);
-    if (details.isSymbolicLink() || !details.isDirectory()) {
-      throw new Error(`${field} must be a private directory`);
-    }
-    current = next;
-  }
-}
-
 export async function ensureCentralDirectory(directory: string, field: string): Promise<void> {
   try {
     const details = await lstat(directory);

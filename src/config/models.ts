@@ -2,10 +2,10 @@ import { readFile } from "node:fs/promises";
 import * as path from "node:path";
 import type { AgentRole, ModelSpec, RepoPolicy } from "../contracts.ts";
 import { MODEL_ROLE_ORDER } from "../contracts.ts";
+import { ensurePrivateDirectoryTree } from "../coordinator/lock.ts";
 import { writeJsonAtomically } from "../runtime/persistence.ts";
 import {
   configuredHome,
-  ensurePrivateDirectoryTree,
   inspectPolicyPath,
   isContainedPath,
   type PolicyTextReader,
