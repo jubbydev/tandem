@@ -4,6 +4,7 @@ import {
   USAGE_RECORD_SCHEMA_VERSION,
   type UsageRecord,
 } from "../runtime/usage.ts";
+import { isRecord } from "./primitives.ts";
 
 const TYPESAFE_ENDPOINT = "https://api.typesafe.ai/v1/systemone";
 export const JEV_MODEL = "jev-1.13.0" as const;
@@ -163,10 +164,6 @@ export function jevUsageRecord(
 
 function fail(code: JevEvaluationError["code"], message: string): never {
   throw new JevEvaluationError(code, message);
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
 function isFiniteUnit(value: unknown): value is number {

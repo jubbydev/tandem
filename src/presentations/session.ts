@@ -3,6 +3,7 @@ import { lstat, mkdir, readdir, readFile, realpath, writeFile } from "node:fs/pr
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { listenPresentation, openPresentation, pollPresentation } from "../adapters/lavish.ts";
+import { isRecord } from "../adapters/primitives.ts";
 import type { Clock, CommandRequest, CommandRunner, TaskRecord } from "../contracts.ts";
 import {
   ARTIFACT_FILE,
@@ -90,10 +91,6 @@ const DESIGN_DEPENDENCY_MARKERS: readonly string[] = [
   "@shadcn/",
   "shadcn",
 ];
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
-}
 
 function readPositiveInteger(value: unknown, field: string): number {
   if (typeof value !== "number" || !Number.isSafeInteger(value) || value <= 0) {
