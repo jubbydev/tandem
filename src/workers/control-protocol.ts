@@ -1,11 +1,11 @@
 import { isAbsolute } from "node:path";
+import { isRecord } from "../adapters/primitives.ts";
 import type { TaskInbox, WorkerReceipt } from "../contracts.ts";
 import { parseTaskMessageBatch, type TaskMessageBatch } from "../tasks/communication-protocol.ts";
 
 export const WORKER_CONTROL_ENV = "TANDEM_WORKER_CONTROL";
 
 const MAX_TOOL_NAME_CHARS = 256;
-type JsonRecord = Record<string, unknown>;
 
 export type WorkerControlConfig = Readonly<{
   readonly schemaVersion: 1;
@@ -16,10 +16,6 @@ export type WorkerControlConfig = Readonly<{
   readonly receiptPath: string;
   readonly initialRevision: number;
 }>;
-
-function isRecord(value: unknown): value is JsonRecord {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
 
 function readSingleLine(value: unknown, field: string, maxChars = 4096): string {
   if (typeof value !== "string" || value.length === 0 || value.trim().length === 0) {

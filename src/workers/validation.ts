@@ -1,4 +1,5 @@
 import * as path from "node:path";
+import { isRecord } from "../adapters/primitives.ts";
 import type {
   CommandRequest,
   CommandResult,
@@ -35,10 +36,6 @@ class ValidationCancelledError extends Error {
     super(message);
     this.name = "ValidationCancelledError";
   }
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
 function readRepositoryPath(repoPath: string): string {
