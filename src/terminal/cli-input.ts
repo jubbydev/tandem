@@ -91,7 +91,7 @@ export function mergingChoiceFrom(input: Readonly<Record<string, unknown>>): Mer
   };
 }
 
-export function summaryFromValue(value: string, field = "summary"): PrSummary {
+function summaryFromValue(value: string, field = "summary"): PrSummary {
   const object = parseJsonObject(value, field);
   const keys = Object.keys(object);
   for (const key of keys) {
@@ -188,7 +188,7 @@ async function statField(
   }
 }
 
-export async function verifyRegularPath(
+async function verifyRegularPath(
   statPath: (path: string) => Promise<PathStat>,
   path: string,
   field: string,

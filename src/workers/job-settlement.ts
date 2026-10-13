@@ -48,10 +48,7 @@ export function taskAtRest(task: TaskRecord): boolean {
 }
 
 /** Releases the task's reservation once no job of its operation is still active. */
-export function releaseIdleReservation(
-  runtime: RuntimeTaskState,
-  now: IsoTimestamp,
-): RuntimeTaskState {
+function releaseIdleReservation(runtime: RuntimeTaskState, now: IsoTimestamp): RuntimeTaskState {
   if (runtime.reservation === undefined || runtime.jobs.some(activeRuntimeJob)) return runtime;
   return {
     ...runtime,

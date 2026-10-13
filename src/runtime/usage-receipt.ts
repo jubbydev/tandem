@@ -32,7 +32,7 @@ export type RequestUsageExposure = Readonly<{
 export const REQUEST_RECEIPT_SCHEMA_VERSION = 1;
 
 /** How many individual samples a receipt's expandable breakdown carries at most. */
-export const MAX_RECEIPT_BREAKDOWN_SAMPLES = 50;
+const MAX_RECEIPT_BREAKDOWN_SAMPLES = 50;
 
 /**
  * Everything one request's accounting rows amount to, including the rows that could not be read.
@@ -45,7 +45,7 @@ export type RequestUsageReadout = Readonly<{
 }>;
 
 /** A duration in milliseconds, or the explicit marker when the interval could not be measured. */
-export type ElapsedMillis = number | "unavailable";
+type ElapsedMillis = number | "unavailable";
 
 /**
  * The request's wall-clock accounting. `elapsedMs` is intake-to-terminal wall time including every
@@ -53,7 +53,7 @@ export type ElapsedMillis = number | "unavailable";
  * some work was actually running, so `overlappingMs` is exactly the concurrency that must not
  * reach elapsed time.
  */
-export type ReceiptTiming = Readonly<{
+type ReceiptTiming = Readonly<{
   readonly intakeAt: IsoTimestamp | "unavailable";
   readonly terminalAt: IsoTimestamp | "unavailable";
   readonly elapsedMs: ElapsedMillis;
@@ -72,7 +72,7 @@ export type AdditionalCharges = Readonly<{
 }>;
 
 /** One subscription allowance drawn down, in the provider's own units and never in currency. */
-export type IncludedQuotaTotal = Readonly<{
+type IncludedQuotaTotal = Readonly<{
   readonly plan: string;
   readonly unit: string;
   readonly units: number;
@@ -80,12 +80,12 @@ export type IncludedQuotaTotal = Readonly<{
   readonly estimatedSamples: number;
 }>;
 
-export type IncludedQuota = Readonly<{
+type IncludedQuota = Readonly<{
   readonly entries: readonly IncludedQuotaTotal[];
   readonly unavailableSamples: number;
 }>;
 
-export type TokenTotals = Readonly<{
+type TokenTotals = Readonly<{
   readonly actualInputTokens: number;
   readonly actualOutputTokens: number;
   readonly estimatedInputTokens: number;
@@ -93,7 +93,7 @@ export type TokenTotals = Readonly<{
   readonly unavailableSamples: number;
 }>;
 
-export type RequestWorkKindTotal = Readonly<{
+type RequestWorkKindTotal = Readonly<{
   readonly workKind: RequestWorkKind;
   readonly sampleCount: number;
   readonly activeMs: number;
@@ -105,7 +105,7 @@ export type RequestWorkKindTotal = Readonly<{
   readonly quota: IncludedQuota;
 }>;
 
-export type ProviderSampleTotal = Readonly<{
+type ProviderSampleTotal = Readonly<{
   readonly provider: string;
   readonly model: string;
   readonly sampleCount: number;
@@ -118,7 +118,7 @@ export type ProviderSampleTotal = Readonly<{
  * The expandable half of a receipt. `samples` is bounded; `omittedSamples`, `duplicateSamples`,
  * and `malformedSamples` keep what is not shown visible as a count.
  */
-export type RequestUsageBreakdown = Readonly<{
+type RequestUsageBreakdown = Readonly<{
   readonly byWorkKind: readonly RequestWorkKindTotal[];
   readonly byProvider: readonly ProviderSampleTotal[];
   readonly samples: readonly RequestUsageEvent[];
@@ -128,7 +128,7 @@ export type RequestUsageBreakdown = Readonly<{
 }>;
 
 /** What the request is now: settled with an outcome, or still in flight. */
-export type RequestReceiptStatus = RequestTerminalOutcome | "open";
+type RequestReceiptStatus = RequestTerminalOutcome | "open";
 
 export type RequestUsageReceipt = Readonly<{
   readonly schemaVersion: typeof REQUEST_RECEIPT_SCHEMA_VERSION;

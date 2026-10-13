@@ -3,9 +3,9 @@ import type { StoredTimelineEvent } from "../tasks/timeline.ts";
 /** Why a task is worth looking into: fixed rules over its timeline, never a model's judgement. */
 export type InvestigationTrigger = "restarts" | "fix-rounds" | "blocked";
 
-export const RESTARTS_BEFORE_ASKING = 2;
-export const FIX_ROUNDS_BEFORE_ASKING = 3;
-export const BLOCKED_MS_BEFORE_ASKING = 60 * 60 * 1_000;
+const RESTARTS_BEFORE_ASKING = 2;
+const FIX_ROUNDS_BEFORE_ASKING = 3;
+const BLOCKED_MS_BEFORE_ASKING = 60 * 60 * 1_000;
 
 /**
  * The first rule a task's timeline breaks: restarted twice, three or more fix rounds, or one block

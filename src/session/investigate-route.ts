@@ -9,8 +9,8 @@ import {
 
 /** Bumped whenever the questions below change shape or meaning. */
 export const INVESTIGATE_ROUTE_QUESTION_VERSION = "investigate-route/1";
-export const INVESTIGATE_ROUTE_CONFIDENCE_THRESHOLD = 0.8;
-export const MAX_INVESTIGATE_CANDIDATES = 15;
+const INVESTIGATE_ROUTE_CONFIDENCE_THRESHOLD = 0.8;
+const MAX_INVESTIGATE_CANDIDATES = 15;
 const MAX_LABEL_CHARS = 200;
 
 const WHY = /\bwhy\b/iu;

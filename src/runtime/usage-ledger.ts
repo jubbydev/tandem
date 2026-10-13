@@ -30,7 +30,7 @@ import {
 } from "./usage-receipt.ts";
 
 /** How many of the offered events were new, and how many had already been recorded. */
-export type RequestUsageRecordResult = Readonly<{
+type RequestUsageRecordResult = Readonly<{
   readonly recorded: number;
   readonly duplicates: number;
   /** The events this call added, so a first-time fact such as a delivery can be acted on once. */

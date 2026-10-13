@@ -15,7 +15,7 @@ const ANSWER_POLL_MS = 1_000;
 const REQUEST_ACK_TIMEOUT_MS = 3_000;
 
 /** Why the research agent can't take a follow-up question now; `undefined` when it can. */
-export function researchFollowUpRefusal(
+function researchFollowUpRefusal(
   task: Pick<TaskRecord, "id" | "kind" | "stage" | "researchContinuation">,
   terminal: WorkerTerminalState | undefined,
   nowMs: number,

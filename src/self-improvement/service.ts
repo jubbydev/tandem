@@ -195,7 +195,7 @@ export class SelfImprovement {
 }
 
 /** What the research agent is asked to do, written for it rather than for the user. */
-export function investigationObjective(
+function investigationObjective(
   input: Readonly<{
     readonly task: TaskRecord;
     readonly question: string | undefined;

@@ -174,10 +174,10 @@ function sectionRows(
   return rows;
 }
 
-export type FixSection = Readonly<{ readonly title: string; readonly rows: readonly Row[] }>;
+type FixSection = Readonly<{ readonly title: string; readonly rows: readonly Row[] }>;
 
 /** Groups the report into the short sections the default view prints. */
-export function fixSections(report: ReconcileReport, details: FixDetails): readonly FixSection[] {
+function fixSections(report: ReconcileReport, details: FixDetails): readonly FixSection[] {
   const dryRun = report.mode === "dry-run";
   const listedTasks = new Set(
     [

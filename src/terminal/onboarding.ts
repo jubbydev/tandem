@@ -16,7 +16,7 @@ import {
 } from "../contracts.ts";
 import type { ModelRecord } from "../harness/contract.ts";
 
-export type TerminalSelection = Readonly<{
+type TerminalSelection = Readonly<{
   readonly choices: readonly Readonly<{
     readonly name: string;
     readonly value: string;
@@ -33,7 +33,7 @@ export type TerminalPrompter = Readonly<{
   readonly write: (text: string) => void;
 }>;
 
-export type ModelOnboardingMode = "first" | "saved";
+type ModelOnboardingMode = "first" | "saved";
 
 export type ModelOnboardingInput = Readonly<{
   readonly mode: ModelOnboardingMode;

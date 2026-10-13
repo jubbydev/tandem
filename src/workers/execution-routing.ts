@@ -45,10 +45,7 @@ import { formatDecisionQuestion, taskName } from "../tasks/question.ts";
 import type { WorkerRole } from "./jobs.ts";
 
 /** Why no catalogue evidence is on hand. None of these ever reads as "nothing is included". */
-export type ModelCatalogueUnavailableReason =
-  | "not-consulted"
-  | "catalogue-unreadable"
-  | "catalogue-empty";
+type ModelCatalogueUnavailableReason = "not-consulted" | "catalogue-unreadable" | "catalogue-empty";
 
 /**
  * The OMP catalogue and the explicitly enabled providers as one boundary observed them. A snapshot
@@ -78,7 +75,7 @@ export type ModelCatalogueReader = (
 ) => Promise<ModelCatalogueSnapshot>;
 
 /** The identities one routing choice is resolved under and recorded against. */
-export type ExecutionAttemptIdentity = Readonly<{
+type ExecutionAttemptIdentity = Readonly<{
   readonly requestId?: string;
   readonly taskId: string;
   readonly jobId: string;

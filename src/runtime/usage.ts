@@ -61,7 +61,7 @@ export type UsageCost = Readonly<{
 }>;
 
 /** Grouping tags for one usage sample. Each is optional; an absent tag aggregates as "unknown". */
-export type UsageContext = Readonly<{
+type UsageContext = Readonly<{
   readonly fixture?: string;
   readonly role?: string;
   readonly taskId?: string;
@@ -73,7 +73,7 @@ export type TaggedUsageRecord = Readonly<{
   readonly usage: UsageRecord;
 }>;
 
-export type UsageAggregateKey = Readonly<{
+type UsageAggregateKey = Readonly<{
   readonly fixture: string;
   readonly role: string;
   readonly taskId: string;
@@ -133,9 +133,6 @@ export type RequestWorkStatus = (typeof REQUEST_WORK_STATUSES)[number];
 export const REQUEST_TERMINAL_OUTCOMES = ["delivered", "cancelled", "failed"] as const;
 
 export type RequestTerminalOutcome = (typeof REQUEST_TERMINAL_OUTCOMES)[number];
-
-/** Where a recorded number came from. An estimate always names the method that produced it. */
-export type UsageProvenance = "actual" | "estimated" | "unavailable";
 
 /**
  * Why a number could not be observed. The set is closed so an unavailable marker can never

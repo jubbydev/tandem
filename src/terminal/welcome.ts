@@ -24,7 +24,7 @@ export const WELCOME_TEXT = `${WELCOME_TITLE}\n\n${WELCOME_BODY}\n\nTo start, sa
 type WelcomeKey = "start" | "close";
 
 /** Waits for Enter (start) or Esc, q, or Ctrl-C (close); without a terminal it closes at once. */
-export function readWelcomeKey(input: NodeJS.ReadableStream): Promise<WelcomeKey> {
+function readWelcomeKey(input: NodeJS.ReadableStream): Promise<WelcomeKey> {
   const tty = input as NodeJS.ReadableStream & {
     readonly isTTY?: unknown;
     readonly setRawMode?: (raw: boolean) => unknown;

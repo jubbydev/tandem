@@ -15,7 +15,7 @@ import { renderRequestBriefMarkdown } from "./markdown.ts";
 import { closeNativeBriefPane, projectNativeBriefPane } from "./native-pane.ts";
 
 /** Directory under the Tandem home holding the rendered read-only brief projections. */
-export const REQUEST_BRIEF_DIRECTORY = "request-briefs";
+const REQUEST_BRIEF_DIRECTORY = "request-briefs";
 
 export type RequestReviewPaneDependencies = Readonly<{
   readonly terminal: TerminalBackend;
@@ -55,11 +55,11 @@ export function briefViewerCommand(renderedPath: string): readonly string[] {
   ];
 }
 
-export function requestBriefMarkdownPath(home: string, requestId: string): string {
+function requestBriefMarkdownPath(home: string, requestId: string): string {
   return join(home, REQUEST_BRIEF_DIRECTORY, `${requestId}.md`);
 }
 
-export function requestBriefWorkspaceLabel(repoPath: string): string {
+function requestBriefWorkspaceLabel(repoPath: string): string {
   return `Tandem request brief · ${basename(repoPath)}`;
 }
 

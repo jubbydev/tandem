@@ -52,7 +52,7 @@ type Reply<T extends SessionEvent["type"]> = ReplyFor<Extract<SessionEvent, { ty
 const OPERATION_FAILED = "Tandem extension operation failed";
 
 /** A thread closes after this much time without user participation. */
-export const THREAD_IDLE_MS = 30 * 60 * 1_000;
+const THREAD_IDLE_MS = 30 * 60 * 1_000;
 
 function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);

@@ -67,7 +67,7 @@ export type CliCommandContext = Readonly<{
   readonly capabilities: CliCapabilities;
 }>;
 
-export type CliCommandOutcome = Omit<CliResult, "command">;
+type CliCommandOutcome = Omit<CliResult, "command">;
 
 type CliCommandHandler = (context: CliCommandContext) => Promise<CliCommandOutcome>;
 
