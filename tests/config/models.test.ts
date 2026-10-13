@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, stat, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { readModelSettings, writeModelSettings } from "../../src/config/models.ts";
@@ -48,6 +48,38 @@ test("writeModelSettings persists enabled providers deduplicated and sorted", as
     expect(reread.enabledProviders).toEqual(["acme", "globex"]);
     const raw = JSON.parse(await readFile(join(home, "models.json"), "utf8"));
     expect(raw.enabledProviders).toEqual(["acme", "globex"]);
+  });
+});
+
+test("model writes create nested private homes and preserve existing ancestor permissions", async () => {
+  await withFixture(async ({ repo, home }) => {
+    await mkdir(home, { mode: 0o755 });
+    const ancestorMode = (await stat(home)).mode & 0o777;
+    const missingParent = join(home, "missing");
+    const nestedHome = join(missingParent, "tandem");
+
+    const written = await writeModelSettings({ repoPath: repo, home: nestedHome, models: MODELS });
+
+    expect(written.configured).toBe(true);
+    expect(written.models).toEqual(MODELS);
+    expect((await stat(home)).mode & 0o777).toBe(ancestorMode);
+    expect((await stat(missingParent)).mode & 0o777).toBe(0o700);
+    expect((await stat(nestedHome)).mode & 0o777).toBe(0o700);
+    expect((await stat(written.configPath)).mode & 0o777).toBe(0o600);
+  });
+});
+
+test("model writes refuse a symlinked settings file without changing its target", async () => {
+  await withFixture(async ({ repo, home }) => {
+    await mkdir(home);
+    const outside = join(home, "..", "outside-models.json");
+    await writeFile(outside, "keep this", "utf8");
+    await symlink(outside, join(home, "models.json"));
+
+    await expect(writeModelSettings({ repoPath: repo, home, models: MODELS })).rejects.toThrow(
+      "central policy path contains a symlink",
+    );
+    expect(await readFile(outside, "utf8")).toBe("keep this");
   });
 });
 

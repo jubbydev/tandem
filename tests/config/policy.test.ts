@@ -287,6 +287,25 @@ test("setup writes a private central policy and never creates a child-repository
   });
 });
 
+test("setup creates nested private homes and preserves existing ancestor permissions", async () => {
+  await withFixture("nested-home-repo", async ({ repo, home }) => {
+    await mkdir(home, { mode: 0o755 });
+    const ancestorMode = (await stat(home)).mode & 0o777;
+    const missingParent = join(home, "missing");
+    const nestedHome = join(missingParent, "tandem");
+
+    const result = await onboardRepo({ repoPath: repo, home: nestedHome, write: true });
+
+    expect(result.written).toBe(true);
+    expect((await stat(home)).mode & 0o777).toBe(ancestorMode);
+    expect((await stat(missingParent)).mode & 0o777).toBe(0o700);
+    expect((await stat(nestedHome)).mode & 0o777).toBe(0o700);
+    expect((await stat(join(nestedHome, "repositories"))).mode & 0o777).toBe(0o700);
+    expect((await stat(dirname(result.configPath))).mode & 0o777).toBe(0o700);
+    expect((await stat(result.configPath)).mode & 0o777).toBe(0o600);
+  });
+});
+
 test("saving commands replaces only the two command lists of a saved project", async () => {
   await withFixture("save-commands-repo", async ({ repo, home }) => {
     const { configPath } = await onboardRepo({ repoPath: repo, home, write: true });
@@ -387,6 +406,19 @@ test("central policy validation rejects malformed and mismatched repository iden
     await rm(preview.configPath);
     await writeCentralEnvelope(preview.configPath, `${repo}-different`, {});
     await expect(resolveRepoPolicy({ repoPath: repo, home })).rejects.toThrow(TypeError);
+  });
+});
+
+test("setup refuses a non-directory policy namespace and preserves the occupied path", async () => {
+  await withFixture("occupied-policy-repo", async ({ repo, home }) => {
+    await mkdir(home);
+    const occupied = join(home, "repositories");
+    await writeFile(occupied, "keep this", "utf8");
+
+    await expect(onboardRepo({ repoPath: repo, home, write: true })).rejects.toThrow(
+      "central policy directory is not a directory",
+    );
+    expect(await readFile(occupied, "utf8")).toBe("keep this");
   });
 });
 
