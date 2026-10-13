@@ -10,6 +10,7 @@ import {
   parseHarnessName,
 } from "../harness/contract.ts";
 import { isRecord, nonNegativeInteger, text as parseText } from "../runtime/schema.ts";
+import { errorCode } from "../tasks/store-errors.ts";
 import { storedEndpointTerminal } from "../terminal-backend/identity.ts";
 
 export const REGISTRY_DIRECTORY = "coordinator-registry";
@@ -35,12 +36,6 @@ export type CoordinatorRecord = Readonly<{
   readonly command: readonly string[];
   readonly pendingSourceRefresh?: PendingSourceRefresh;
 }>;
-export function errorCode(error: unknown): string | undefined {
-  return error instanceof Error && "code" in error && typeof error.code === "string"
-    ? error.code
-    : undefined;
-}
-
 export function isMissing(error: unknown): boolean {
   return errorCode(error) === "ENOENT";
 }
