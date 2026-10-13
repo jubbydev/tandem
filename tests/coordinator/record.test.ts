@@ -1,5 +1,6 @@
 import { expect, test } from "bun:test";
-import { errorCode, parseEndpoint, parseWorktree, text } from "../../src/coordinator/record.ts";
+import { parseEndpoint, parseWorktree, text } from "../../src/coordinator/record.ts";
+import { errorCode } from "../../src/tasks/store-errors.ts";
 
 const endpoint = {
   sessionId: "session",

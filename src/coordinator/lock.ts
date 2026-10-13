@@ -1,11 +1,11 @@
 import { lstat, mkdir } from "node:fs/promises";
 import { dirname, join, sep } from "node:path";
+import { errorCode } from "../tasks/store-errors.ts";
 import { acquireDarwinFileLock } from "../tasks/store-lock.ts";
 import {
   canonicalHome,
   canonicalPath,
   digest,
-  errorCode,
   isMissing,
   REGISTRY_DIRECTORY,
   sessionText,
